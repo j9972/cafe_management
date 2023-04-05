@@ -1,0 +1,70 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.0.5'
+    id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'cafe'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+
+    // jwt 를 위한 dependency 추가
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+    implementation 'io.jsonwebtoken:jjwt-impl:0.11.2'
+    implementation 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+    implementation 'com.auth0:java-jwt:3.18.3'
+    implementation 'com.auth0:auth0-spring-security-api:1.5.2'
+
+    // mail
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    // implementation 'com.sun.mail:jakarta.mail:2.1.0'
+
+    // itextpdf -> for downloading & generating the PDF file
+    implementation 'com.itextpdf:itextpdf:5.0.6'
+
+    // pdfbox -
+    implementation 'org.apache.pdfbox:pdfbox:2.0.1'
+
+    // guava -> validation of string, check the null, not empty etc
+    // guava 라이브러리 ->  Strings.isNullOrEmpty() or objects.isNull() 이런거 사용 가능하게 해줌
+    implementation 'com.google.guava:guava:16.0.1'
+
+    // gson -> from json to model class
+    implementation 'com.google.code.gson:gson:2.9.0'
+
+    implementation 'javax.xml.bind:jaxb-api:2.3.0'
+
+    // org.json
+    implementation 'org.json:json:20211205'
+
+     // java -> jasypt , node -> .env
+    implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.3"
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+    systemProperty 'jasypt.encryptor.password', findProperty("jasypt.encryptor.password")
+}

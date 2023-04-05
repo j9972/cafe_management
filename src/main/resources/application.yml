@@ -1,0 +1,51 @@
+
+server:
+  port: 4200
+  error:
+    include-message: always
+    include-binding-errors : always
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url : jdbc:mysql://localhost:3306/cafe_management
+    username : ENC(kVMfQIgMKVd2wSUL/8402A==)
+    password : ENC(XHz8n0/Y+sugfMETcXVEKgv5ANkbB5Yw)
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: mysql
+  mail:
+    # stmp.gmail.com -> 587 port number 사용
+    host: smtp.gmail.com
+    port: 587
+    username: ENC(4MBf+F49liCraO60LQPpdLi8br0COUWB/IjPUEwcmUo=)
+    # spring.mail.password=보내는 이메일 비밀번호(앱 비밀번호 권장) -> myaccount.google.com 에서 받아
+    password: ENC(kyCiq/U1teh530+2AOEhEcncedoKRYjhMY3qh2ezhxo=)
+    properties:
+      mail:
+        default-encoding : utf-8
+        #debug : true # 메일 전송시 어떻게 전송되는지 파악하기 위함
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+#          connectiontimeout: 5000
+#          timeout: 3000
+#          writetimeout:5000
+
+# 프로퍼티 암호화 설정
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
